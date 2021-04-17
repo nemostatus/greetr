@@ -28,7 +28,15 @@ validate: function(){
     if(supportedLanguages.indexOf(this.language) === -1){
 throw "invalid message"
     }
-} //throws error if language isnt found in supported languages arr
+},//throws error if language isnt found in supported languages arr
+
+greeting: function(){
+    return greetings[this.language] + ' ' + this.firstName + '!'
+},
+
+formalGreeting: function(){
+return formalGreetings[this.language] + this.fullName()
+}
 
   }; //prototype of all object below, methods go here
 

@@ -1,20 +1,21 @@
 (function(global,$){
+    //new object
   var Greetr = function(firstName, lastName, language){
       return new Greetr.init(firstName,lastName,language)
   } //coding it this way so the new keyword doesnt have to be used all the time
 
   var supportedLanguages = ["en", "es"] //hidden to outside world, uses closure
-
+//informal greetings
   var greetings ={
 en: 'Hello',
 es: 'Hola'
   }; 
-
+//formal greetings
   var formalGreetings ={
 en: 'Greetings',
 es: 'Saludos'
   };
-
+//logger messages
   var logMessages ={
       en: 'Logged In',
       es: 'Inicio Sesion'
@@ -61,6 +62,24 @@ setLang: function(lang){
     this.language = lang
     this.validate()
 return this 
+  },
+
+  HTMLGreeting: function(selector,formal){
+if(!$){
+    throw 'jQuery not loaded'
+}
+if(!selector){
+    throw ' missing jQuery selector'
+}
+var msg;
+if(formal){
+    msg = this.formalGreeting()
+}
+else{
+    msg = this.greeting()
+}
+$(selector).html(msg);
+return this 
   }
 }//prototype of all object below, methods go here
 
@@ -69,8 +88,9 @@ return this
      self.firstName = firstName || '';
      self.lastName = lastname || '';
      self.language = language || 'en'
+     self.validate()
   }
-  Greetr.init.prototype = Greetr.prototype
+  Greetr.init.prototype = Greetr.prototype //so the new keyword doesnt have to be used
   global.Greetr = global.G$ = Greetr
 }(window, jQuery));
 //iife

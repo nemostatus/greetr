@@ -11,13 +11,13 @@ es: 'Hola'
   }; 
 
   var formalGreetings ={
-en: 'greetings',
-es: 'saludos'
+en: 'Greetings',
+es: 'Saludos'
   };
 
   var logMessages ={
       en: 'Logged In',
-      es: 'Inicio sesion'
+      es: 'Inicio Sesion'
   }
   Greetr.prototype = {
 fullName: function(){
@@ -35,15 +35,39 @@ greeting: function(){
 },
 
 formalGreeting: function(){
-return formalGreetings[this.language] + this.fullName()
+return formalGreetings[this.language] + ' ' +  this.fullName()
+},
+greet: function(formal){
+    var msg;
+    if(formal){
+        msg = this.formalGreeting()
+    }
+    else{
+        msg = this.greeting()
+    }
+    if(console){
+        console.log(msg)
+    }
+    return this 
+},
+log: function(){
+if(console){
+    console.log(logMessages[this.language] + ': ' + this.fullName())
 }
+return this //makes method chainable
+},
 
-  }; //prototype of all object below, methods go here
+setLang: function(lang){
+    this.language = lang
+    this.validate()
+return this 
+  }
+}//prototype of all object below, methods go here
 
   Greetr.init = function(firstName,lastname,language){
      var self = this  //dont have to worry about what this is later
      self.firstName = firstName || '';
-     self.lastname = lastname || '';
+     self.lastName = lastname || '';
      self.language = language || 'en'
   }
   Greetr.init.prototype = Greetr.prototype
